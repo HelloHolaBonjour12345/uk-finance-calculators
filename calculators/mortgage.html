@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mortgage Calculator | UK Finance Calculators</title>
+<link rel="stylesheet" href="../css/styles.css">
+<script defer src="../js/main.js"></script>
+</head>
+<body>
+
+<h2>Mortgage Calculator</h2>
+
+<div class="calculator-box">
+
+<input type="number" id="amount" placeholder="Loan Amount (£)">
+<input type="number" id="rate" placeholder="Interest Rate (%)">
+<input type="number" id="years" placeholder="Term (Years)">
+<button onclick="calculate()">Calculate</button>
+
+<p id="result"></p>
+
+</div>
+
+<script>
+function calculate(){
+let P=parseFloat(amount.value);
+let r=parseFloat(rate.value)/100/12;
+let n=parseFloat(years.value)*12;
+
+if(!P||!r||!n){ result.innerText="Please fill all fields."; return;}
+
+let M=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+result.innerText="Monthly Payment: £"+M.toFixed(2);
+}
+</script>
+
+</body>
+</html>
