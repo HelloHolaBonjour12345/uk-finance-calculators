@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Debt Snowball vs Avalanche</title>
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<h2>Debt Strategy Comparison</h2>
+
+<div class="calculator-box">
+<textarea id="debts" rows="6" placeholder="Enter debts as:
+Balance,Rate
+5000,18
+3000,12"></textarea>
+
+<input type="number" id="payment" placeholder="Monthly Extra Payment (£)">
+<button onclick="calc()">Compare</button>
+<p id="result"></p>
+</div>
+
+<script>
+function simulate(debts, sortType, payment){
+debts=JSON.parse(JSON.stringify(debts));
+debts.sort((a,b)=> sortType==="snowball"? a.balance-b.balance : b.rate-a.rate);
+
+let months=0;
+while(debts.some(d=>d.balance>0) && months<600){
+for(let d of debts){
+if(d.balance>0){
+d.balance+=d.balance*(d.rate/100/12);
+let pay=Math.min(payment,d.balance);
+d.balance-=pay;
+}
+}
+months++;
+}
+return months;
+}
+
+function calc(){
+let lines=debts.value.trim().split("\n");
+let payment=parseFloat(document.getElementById("payment").value);
+
+if(!payment||lines.length===0){result.innerText="Fill fields.";return;}
+
+let debtArr=[];
+for(let l of lines){
+let parts=l.split(",");
+debtArr.push({balance:parseFloat(parts[0]),rate:parseFloat(parts[1])});
+}
+
+let snow=simulate(debtArr,"snowball",payment);
+let ava=simulate(debtArr,"avalanche",payment);
+
+result.innerText=
+"Snowball Payoff Time: "+snow+" months"+
+"\nAvalanche Payoff Time: "+ava+" months";
+}
+</script>
+
+</body>
+</html>
