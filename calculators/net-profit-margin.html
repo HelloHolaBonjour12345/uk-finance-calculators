@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Net Profit & Margin Calculator</title>
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<h2>Net Profit & Margin</h2>
+
+<div class="calculator-box">
+<input type="number" id="revenue" placeholder="Revenue (£)">
+<input type="number" id="expenses" placeholder="Expenses (£)">
+<button onclick="calc()">Calculate</button>
+<p id="result"></p>
+</div>
+
+<script>
+function calc(){
+let revenue=parseFloat(document.getElementById("revenue").value);
+let expenses=parseFloat(document.getElementById("expenses").value);
+
+if(!revenue||!expenses){result.innerText="Fill all fields.";return;}
+
+let profit=revenue-expenses;
+let margin=(profit/revenue)*100;
+
+result.innerText=
+"Net Profit: £"+profit.toFixed(2)+
+"\nProfit Margin: "+margin.toFixed(2)+"%";
+}
+</script>
+
+</body>
+</html>
