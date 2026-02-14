@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Pension Growth Calculator</title>
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<h2>Pension Growth Calculator</h2>
+
+<div class="calculator-box">
+<input type="number" id="initial" placeholder="Current Pension (£)">
+<input type="number" id="contribution" placeholder="Monthly Contribution (£)">
+<input type="number" id="rate" placeholder="Annual Return (%)">
+<input type="number" id="years" placeholder="Years Until Retirement">
+<button onclick="calc()">Calculate</button>
+<p id="result"></p>
+</div>
+
+<script>
+function calc(){
+let P=parseFloat(initial.value);
+let C=parseFloat(contribution.value);
+let r=parseFloat(rate.value)/100/12;
+let n=parseFloat(years.value)*12;
+
+if(!P||!C||!r||!n){result.innerText="Fill all fields.";return;}
+
+let futurePrincipal=P*Math.pow(1+r,n);
+let futureContrib=C*((Math.pow(1+r,n)-1)/r);
+let total=futurePrincipal+futureContrib;
+
+result.innerText="Projected Pension: £"+total.toFixed(2);
+}
+</script>
+
+</body>
+</html>
