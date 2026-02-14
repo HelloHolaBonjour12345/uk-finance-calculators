@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mortgage Amortisation Schedule</title>
+<link rel="stylesheet" href="../css/styles.css">
+<style>
+table { width:100%; border-collapse:collapse; margin-top:20px;}
+th, td { border:1px solid #ccc; padding:6px; text-align:right;}
+th { background:#f4f4f4;}
+</style>
+</head>
+<body>
+
+<h2>Mortgage Amortisation Schedule</h2>
+
+<div class="calculator-box">
+<input type="number" id="loan" placeholder="Loan Amount (£)">
+<input type="number" id="rate" placeholder="Interest Rate (%)">
+<input type="number" id="years" placeholder="Years">
+<button onclick="calc()">Generate Schedule</button>
+</div>
+
+<div id="output"></div>
+
+<script>
+function calc(){
+let P=parseFloat(loan.value);
+let r=parseFloat(rate.value)/100/12;
+let n=parseFloat(years.value)*12;
+
+if(!P||!r||!n){output.innerHTML="Fill all fields.";return;}
+
+let payment=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+let balance=P;
+
+let html="<table><tr><th>Month</th><th>Payment</th><th>Interest</th><th>Principal</th><th>Balance</th></tr>";
+
+for(let i=1;i<=n;i++){
+let interest=balance*r;
+let principal=payment-interest;
+balance-=principal;
+
+html+="<tr><td>"+i+"</td><td>"+payment.toFixed(2)+"</td><td>"+interest.toFixed(2)+"</td><td>"+principal.toFixed(2)+"</td><td>"+(balance>0?balance:0).toFixed(2)+"</td></tr>";
+}
+
+html+="</table>";
+output.innerHTML=html;
+}
+</script>
+
+</body>
+</html>
