@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Net Worth Calculator</title>
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<h2>Net Worth Calculator</h2>
+
+<div class="calculator-box">
+<textarea id="assets" rows="4" placeholder="Assets (one per line)"> </textarea>
+<textarea id="liabilities" rows="4" placeholder="Liabilities (one per line)"> </textarea>
+<button onclick="calc()">Calculate</button>
+<p id="result"></p>
+</div>
+
+<script>
+function sum(text){
+return text.trim().split("\n").reduce((a,b)=>a+parseFloat(b||0),0);
+}
+
+function calc(){
+let totalAssets=sum(assets.value);
+let totalLiabilities=sum(liabilities.value);
+
+let net=totalAssets-totalLiabilities;
+
+result.innerText=
+"Total Assets: £"+totalAssets.toFixed(2)+
+"\nTotal Liabilities: £"+totalLiabilities.toFixed(2)+
+"\nNet Worth: £"+net.toFixed(2);
+}
+</script>
+
+</body>
+</html>
