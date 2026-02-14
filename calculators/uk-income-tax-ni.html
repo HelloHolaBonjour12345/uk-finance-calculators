@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>UK Income Tax & NI Calculator</title>
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<h2>UK Income Tax & NI Calculator</h2>
+
+<div class="calculator-box">
+<input type="number" id="income" placeholder="Annual Income (£)">
+<button onclick="calc()">Calculate</button>
+<p id="result"></p>
+</div>
+
+<script>
+function calc(){
+let income=parseFloat(document.getElementById("income").value);
+if(!income){result.innerText="Enter income.";return;}
+
+let tax=0;
+let ni=0;
+
+// Income Tax
+if(income>12570){
+if(income<=50270){
+tax=(income-12570)*0.20;
+}
+else if(income<=125140){
+tax=(50270-12570)*0.20 +
+(income-50270)*0.40;
+}
+else{
+tax=(50270-12570)*0.20 +
+(125140-50270)*0.40 +
+(income-125140)*0.45;
+}
+}
+
+// NI
+if(income>12570){
+if(income<=50270){
+ni=(income-12570)*0.08;
+}
+else{
+ni=(50270-12570)*0.08 +
+(income-50270)*0.02;
+}
+}
+
+let takeHome=income-tax-ni;
+
+result.innerText=
+"Income Tax: £"+tax.toFixed(2)+
+"\nNational Insurance: £"+ni.toFixed(2)+
+"\nTake Home: £"+takeHome.toFixed(2);
+}
+</script>
+
+</body>
+</html>
