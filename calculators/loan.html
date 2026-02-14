@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Loan Calculator</title>
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<h2>Loan Calculator</h2>
+
+<div class="calculator-box">
+<input type="number" id="amount" placeholder="Loan Amount (£)">
+<input type="number" id="rate" placeholder="Interest Rate (%)">
+<input type="number" id="months" placeholder="Loan Length (Months)">
+<button onclick="calc()">Calculate</button>
+<p id="result"></p>
+</div>
+
+<script>
+function calc(){
+let P=parseFloat(amount.value);
+let r=parseFloat(rate.value)/100/12;
+let n=parseFloat(months.value);
+
+if(!P||!r||!n){result.innerText="Fill all fields.";return;}
+
+let payment=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+result.innerText="Monthly Payment: £"+payment.toFixed(2);
+}
+</script>
+
+</body>
+</html>
