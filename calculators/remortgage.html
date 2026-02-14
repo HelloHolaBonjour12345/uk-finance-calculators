@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Remortgage Comparison Calculator</title>
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<h2>Remortgage Comparison</h2>
+
+<div class="calculator-box">
+
+<input type="number" id="balance" placeholder="Remaining Mortgage (£)">
+<input type="number" id="rate1" placeholder="Current Rate (%)">
+<input type="number" id="rate2" placeholder="New Rate (%)">
+<input type="number" id="years" placeholder="Years Remaining">
+
+<button onclick="calc()">Compare</button>
+<p id="result"></p>
+
+</div>
+
+<script>
+function payment(P,r,n){
+return P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+}
+
+function calc(){
+let P=parseFloat(balance.value);
+let r1=parseFloat(rate1.value)/100/12;
+let r2=parseFloat(rate2.value)/100/12;
+let n=parseFloat(years.value)*12;
+
+if(!P||!r1||!r2||!n){result.innerText="Fill all fields.";return;}
+
+let total1=payment(P,r1,n)*n;
+let total2=payment(P,r2,n)*n;
+
+let savings=total1-total2;
+
+result.innerText=
+"Current Total Cost: £"+total1.toFixed(2)+
+"\nNew Total Cost: £"+total2.toFixed(2)+
+"\nPotential Savings: £"+savings.toFixed(2);
+}
+</script>
+
+</body>
+</html>
