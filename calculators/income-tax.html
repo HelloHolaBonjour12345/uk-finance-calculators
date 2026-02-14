@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Income Tax Calculator (UK)</title>
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<h2>UK Income Tax Calculator</h2>
+
+<div class="calculator-box">
+<input type="number" id="income" placeholder="Annual Income (£)">
+<button onclick="calc()">Calculate</button>
+<p id="result"></p>
+</div>
+
+<script>
+function calc(){
+let income=parseFloat(document.getElementById("income").value);
+if(!income){result.innerText="Enter income.";return;}
+
+let tax=0;
+
+if(income>12570){
+let taxable=income-12570;
+if(taxable<=37700){
+tax=taxable*0.20;
+}else{
+tax=37700*0.20 + (taxable-37700)*0.40;
+}
+}
+
+result.innerText="Estimated Tax: £"+tax.toFixed(2);
+}
+</script>
+
+</body>
+</html>
