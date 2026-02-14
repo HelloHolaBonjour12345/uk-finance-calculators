@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Credit Card Payoff Calculator</title>
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<h2>Credit Card Payoff Calculator</h2>
+
+<div class="calculator-box">
+<input type="number" id="balance" placeholder="Current Balance (£)">
+<input type="number" id="apr" placeholder="APR (%)">
+<input type="number" id="months" placeholder="Months to Repay">
+<button onclick="calc()">Calculate</button>
+<p id="result"></p>
+</div>
+
+<script>
+function calc(){
+let P=parseFloat(balance.value);
+let r=parseFloat(apr.value)/100/12;
+let n=parseFloat(months.value);
+
+if(!P||!r||!n){result.innerText="Fill all fields.";return;}
+
+let payment=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+let total=payment*n;
+let interest=total-P;
+
+result.innerText=
+"Monthly Payment: £"+payment.toFixed(2)+
+"\nTotal Interest: £"+interest.toFixed(2);
+}
+</script>
+
+</body>
+</html>
