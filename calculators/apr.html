@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>APR Comparison Calculator</title>
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<h2>APR Comparison Calculator</h2>
+
+<div class="calculator-box">
+<input type="number" id="loan" placeholder="Loan Amount (£)">
+<input type="number" id="apr1" placeholder="APR Option 1 (%)">
+<input type="number" id="apr2" placeholder="APR Option 2 (%)">
+<input type="number" id="years" placeholder="Years">
+<button onclick="calc()">Compare</button>
+<p id="result"></p>
+</div>
+
+<script>
+function monthlyPayment(P,r,n){
+return P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+}
+
+function calc(){
+let P=parseFloat(loan.value);
+let r1=parseFloat(apr1.value)/100/12;
+let r2=parseFloat(apr2.value)/100/12;
+let n=parseFloat(years.value)*12;
+
+if(!P||!r1||!r2||!n){result.innerText="Fill all fields.";return;}
+
+let total1=monthlyPayment(P,r1,n)*n;
+let total2=monthlyPayment(P,r2,n)*n;
+
+let diff=Math.abs(total1-total2);
+
+result.innerText=
+"Option 1 Total: £"+total1.toFixed(2)+
+"\nOption 2 Total: £"+total2.toFixed(2)+
+"\nDifference: £"+diff.toFixed(2);
+}
+</script>
+
+</body>
+</html>
