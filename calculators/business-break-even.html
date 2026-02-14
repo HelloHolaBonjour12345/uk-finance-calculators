@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Business Break Even Calculator</title>
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<h2>Break Even Calculator</h2>
+
+<div class="calculator-box">
+<input type="number" id="fixed" placeholder="Fixed Costs (£)">
+<input type="number" id="price" placeholder="Price per Unit (£)">
+<input type="number" id="variable" placeholder="Variable Cost per Unit (£)">
+<button onclick="calc()">Calculate</button>
+<p id="result"></p>
+</div>
+
+<script>
+function calc(){
+let fixed=parseFloat(fixed.value);
+let price=parseFloat(price.value);
+let variable=parseFloat(variable.value);
+
+if(!fixed||!price||!variable||price<=variable){
+result.innerText="Check inputs.";
+return;
+}
+
+let units=fixed/(price-variable);
+
+result.innerText="Break Even Units: "+units.toFixed(0);
+}
+</script>
+
+</body>
+</html>
