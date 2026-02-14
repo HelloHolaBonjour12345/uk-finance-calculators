@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ROI Calculator</title>
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<h2>Return on Investment (ROI)</h2>
+
+<div class="calculator-box">
+<input type="number" id="cost" placeholder="Investment Cost (£)">
+<input type="number" id="gain" placeholder="Final Value (£)">
+<button onclick="calc()">Calculate</button>
+<p id="result"></p>
+</div>
+
+<script>
+function calc(){
+let cost=parseFloat(document.getElementById("cost").value);
+let gain=parseFloat(document.getElementById("gain").value);
+
+if(!cost||!gain){result.innerText="Fill all fields.";return;}
+
+let roi=((gain-cost)/cost)*100;
+result.innerText="ROI: "+roi.toFixed(2)+"%";
+}
+</script>
+
+</body>
+</html>
