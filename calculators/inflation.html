@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Inflation Calculator</title>
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<h2>Inflation Impact Calculator</h2>
+
+<div class="calculator-box">
+<input type="number" id="amount" placeholder="Current Value (£)">
+<input type="number" id="rate" placeholder="Inflation Rate (%)">
+<input type="number" id="years" placeholder="Years">
+<button onclick="calc()">Calculate</button>
+<p id="result"></p>
+</div>
+
+<script>
+function calc(){
+let P=parseFloat(amount.value);
+let r=parseFloat(rate.value)/100;
+let t=parseFloat(years.value);
+
+if(!P||!r||!t){result.innerText="Fill all fields.";return;}
+
+let future=P*Math.pow(1+r,t);
+result.innerText="Future Value (Inflation Adjusted): £"+future.toFixed(2);
+}
+</script>
+
+</body>
+</html>
